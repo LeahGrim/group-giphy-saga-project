@@ -12,10 +12,10 @@ import Search from '../Search/Search';
 import Favorite from '../Favorite/Favorite';
 
 function App() {
+  
   return (
     <div className= "App">
-     <Header />
-      <div>
+      <Header />
         <h1>Giphy Search!</h1>
 
         <Router>
