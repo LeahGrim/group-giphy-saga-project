@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import './GiphyForm.css'
+import './GiphyForm.css';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
