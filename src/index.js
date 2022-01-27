@@ -80,6 +80,9 @@ const resultsList = (state=null, action) => {
         case 'SET_RESULTS': 
             console.log('in set results', action.payload)
             return action.payload
+        case 'SET_FAVORITES': 
+            console.log('in set results', action.payload)
+            return action.payload
         default:
             return state;
     }
