@@ -25,6 +25,8 @@ function* fetchFavs(){
     console.log('in saga');
     try{
         let response = yield axios.get('/api/favorite');
+        console.log('is response', response.data);
+        
         yield put({
             type: 'SET_FAVORITES',
             payload: response.data
@@ -38,7 +40,7 @@ function* sendFavorite (action){
     try{
     console.log('in sendFavorite', action.payload);
     // set up axios POST
-    yield axios.post('/api/favorite', action.payload)
+    yield axios.post('/api/favorite', {url: action.payload})
     } // try ends here
     catch(err){
         console.log('sendFavorite failed', err);
@@ -94,13 +96,20 @@ const resultsList = (state=null, action) => {
         case 'SET_RESULTS': 
             console.log('in set results', action.payload)
             return action.payload
+        default:
+            return state;
+    }
+}; // End resultsList reducer
+
+const favList = (state=null, action) => {
+    switch(action.type) {
         case 'SET_FAVORITES': 
             console.log('in set results', action.payload)
             return action.payload
         default:
             return state;
     }
-}; // End resultsList reducer
+}
 
 // Reducer to set search parameter
 // const 
@@ -108,7 +117,8 @@ const resultsList = (state=null, action) => {
 // Create one store that all components can use
 const store = createStore(
     combineReducers({
-        resultsList
+        resultsList,
+        favList,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
