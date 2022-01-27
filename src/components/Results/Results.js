@@ -6,7 +6,7 @@ import axios from 'axios';
 function Results () {
     const dispatch = useDispatch();
 
-    const selectedGif = useSelector(store => store.resultsList)
+    // const selectedGif = useSelector(store => store.resultsList)
 
     const likePix = (liked) => {
         console.log('in likePix');
@@ -25,7 +25,7 @@ function Results () {
     return (
         <>
         <ul>
-            {selectedGif.map((eachGif, index) => (<li key={index}> {<img src={eachGif} alt='cool image' width={200} />} <button onClick={() => likePix(liked)}> ❤️ </button></li>))}
+            {/* {selectedGif.map((eachGif, index) => (<li key={index}> {<img src={eachGif} alt='cool image' width={200} />} <button onClick={() => likePix(liked)}> ❤️ </button></li>))} */}
         </ul>
         
         
