@@ -8,11 +8,11 @@ import Stack from '@mui/material/Stack';
 
 
 function GiphyForm(){
-   let [newGif, setNewGif] = useState('');
+    let [newGif, setNewGif] = useState('');
     
 
    //setup dispatch 
-   const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     function addNewSearch(event) {
         event.preventDefault();
@@ -20,8 +20,9 @@ function GiphyForm(){
             type: 'SET_SEARCH',
             payload: newGif
         })
-        console.log('in grabSearch', event)
+        console.log('in grabSearch', newGif)
         
+        setNewGif('');
     }
 
     

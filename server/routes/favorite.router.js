@@ -5,11 +5,19 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  res.sendStatus(200);
+  const qt = 'SELECT * FROM favorites;'
+  pool.query(qt)
+    .then(dbres => {
+      console.log('GOT FAV', dbres);
+      res.send(dbres.data)
+    }).catch(err => {
+      console.error('NO GET FAV', err);
+    })
 });
 
 // add a new favorite
 router.post('/', (req, res) => {
+  pool.query
   res.sendStatus(200);
 });
 
