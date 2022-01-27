@@ -28,11 +28,23 @@ function Results () {
         <>
         <div className="gifBox" >
             {selectedGif && 
-                <ul>
+                <div className='container'>
                     
-                    {selectedGif.data.map((eachGif, index) => 
-                        (<li key={index}> {<img src={eachGif.images.original.url} alt='cool image' width={200} />} <br></br><button onClick={event => likePix(eachGif.images.original.url)}> ❤️ </button></li>))}
-                </ul>
+                    {selectedGif.data.map((eachGif, index) => (
+                        <div className='picDiv'>
+                            <img 
+                                key={index} 
+                                src={eachGif.images.original.url} 
+                                alt='cool image' 
+                                width={200} 
+                                height={250}
+                                className='pic'
+                            /> 
+                            <br/>
+                            <button onClick={event => likePix(eachGif.images.original.url)}> ❤️ </button>
+                        </div>
+                        ))}
+                </div>
             }
         </div>
         </>
