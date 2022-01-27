@@ -1,4 +1,8 @@
 import React from 'react';
+import GiphyForm from '../GiphyForm/GiphyForm.jsx'
+import './App.css'
+import Header from '../Header/Header.jsx'
+import Footer from '../Footer/Footer.jsx'
 import { render } from "react-dom";
 import {
   BrowserRouter,
@@ -12,9 +16,9 @@ import GiphyForm from '../GiphyForm/GiphyForm.jsx';
 
 function App() {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
-
+    <div className= "App">
+     <Header />
+    
       <BrowserRouter>
       <Route path="/" exact>
         <Favorite />
@@ -23,6 +27,8 @@ function App() {
 
       <GiphyForm />
       <Results />
+      <Footer />
+    
     </div>
   );
 }
