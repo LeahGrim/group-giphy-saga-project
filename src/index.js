@@ -17,10 +17,22 @@ function* rootSaga() {
     yield takeEvery('FETCH_RESULTS', fetchResults);
     yield takeEvery('SET_SEARCH', searchParam);
     yield takeEvery('IMAGE_LIKED', sendFavorite)
-
-
+    yield takeEvery('FETCH_FAVORITES', fetchFavs)
 } // end function rootSaga
-    
+
+
+function* fetchFavs(){
+    console.log('in saga');
+    try{
+        let response = yield axios.get('/api/favorite');
+        yield put({
+            type: 'SET_FAVORITES',
+            payload: response.data
+        })
+    } catch(err){
+        console.error(err);
+    }
+} // end function rootSaga
 
 function* sendFavorite (action){
     try{
@@ -32,7 +44,6 @@ function* sendFavorite (action){
         console.log('sendFavorite failed', err);
     }
 } // end function sendFavorite
-
 
 
 
@@ -81,6 +92,9 @@ function* searchParam(action) {
 const resultsList = (state=null, action) => {
     switch(action.type) {
         case 'SET_RESULTS': 
+            console.log('in set results', action.payload)
+            return action.payload
+        case 'SET_FAVORITES': 
             console.log('in set results', action.payload)
             return action.payload
         default:

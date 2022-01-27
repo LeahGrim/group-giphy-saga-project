@@ -1,0 +1,9 @@
+.h1Title{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfE5TJOKiqKl0tshKl6YDyeI30NUmprf6uw&usqp=CAU");
+    object-fit: fill;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+}

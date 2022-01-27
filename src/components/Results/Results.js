@@ -6,22 +6,17 @@ import './Results.css'
 
 function Results () {
     const dispatch = useDispatch();
-
     
     const selectedGif = useSelector(store => store.resultsList)
-
     
-
     console.log('this is the selected GIF', selectedGif);
     
-
     const likePix = (liked) => {
         console.log('in likePix', liked);
         dispatch ({
             type: 'IMAGE_LIKED',
             payload: liked
         })
-        
     }
 
     // note .... saga should listen for a dispatch message of "IMAGE_LIKED" 
@@ -41,7 +36,6 @@ function Results () {
             }
         </div>
         </>
-       
     )
 }
 
