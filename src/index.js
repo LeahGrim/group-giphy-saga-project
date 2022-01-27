@@ -14,12 +14,11 @@ import axios from 'axios';
 
 // Create the rootSaga/watcherSaga generator function
 function* rootSaga() {
-
     yield takeEvery('FETCH_RESULTS', fetchResults);
+    yield takeEvery('SET_SEARCH', searchParam);
+
 
 } // end function rootSaga
-
-//random reducer 
     
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -30,11 +29,30 @@ function* fetchResults() {
         console.log('made it to fetch results');
 
         // Axios request to get from api
-        let response = yield axios.get('');
+        let response = yield axios.get('/api/results');
         console.log('response data is', response.data);
 
         yield put({
-            type: 'SET_SEARCH',
+            type: 'SET_RESULTS',
+            payload: response.data
+        })
+    }
+    catch(err){
+        console.error('failed to get search results', err);
+    }
+}; // end fetchResults function
+
+// Function to get search results
+function* searchParam(action) {
+    try {
+        console.log('made it to search param');
+
+        // Axios request to get from api
+        let response = yield axios.get('/api/results', {params: {q: action.payload}});
+        console.log('response data is', response.data);
+
+        yield put({
+            type: 'SET_RESULTS',
             payload: response.data
         })
     }
@@ -46,12 +64,16 @@ function* fetchResults() {
 // Reducer to set search results
 const resultsList = (state=null, action) => {
     switch(action.type) {
-        case 'SET_SEARCH':
+        case 'SET_RESULTS': 
+            console.log('in set results', action.payload)
             return action.payload
         default:
             return state;
     }
 }; // End resultsList reducer
+
+// Reducer to set search parameter
+// const 
 
 // Create one store that all components can use
 const store = createStore(
