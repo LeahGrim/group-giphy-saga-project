@@ -6,7 +6,7 @@ import axios from 'axios';
 function Results () {
     const dispatch = useDispatch();
 
-    const selectedGif = useSelector(store => store.resultsList)
+    // const selectedGif = useSelector(store => store.resultsList)
 
     const likePix = (liked) => {
         console.log('in likePix');

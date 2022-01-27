@@ -30,8 +30,7 @@ function* fetchFavs(){
     } catch(err){
         console.error(err);
     }
-}// end function rootSaga
-    
+} // end function rootSaga
 
 
 // Create sagaMiddleware

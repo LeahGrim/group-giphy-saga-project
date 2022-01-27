@@ -4,30 +4,32 @@ import Header from '../Header/Header.jsx'
 import Footer from '../Footer/Footer.jsx'
 import { render } from "react-dom";
 import {
-  BrowserRouter,
-  Routes,
+  HashRouter as Router,
   Route
 } from "react-router-dom";
 //components
+import Search from '../Search/Search';
 import Favorite from '../Favorite/Favorite';
-import Results from '../Results/Results';
-import GiphyForm from '../GiphyForm/GiphyForm.jsx';
 
 function App() {
   return (
     <div className= "App">
      <Header />
-    
-      <BrowserRouter>
-      <Route path="/" exact>
-        <Favorite />
-      </Route>
-  </BrowserRouter>
+      <div>
+        <h1>Giphy Search!</h1>
 
-      <GiphyForm />
-      <Results />
+        <Router>
+
+          <Route exact path="/">
+            <Search />
+          </Route>
+
+          <Route exact path="/favorite" >
+            <Favorite />
+          </Route>
+
+        </Router>
       <Footer />
-    
     </div>
   );
 }
