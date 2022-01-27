@@ -1,6 +1,15 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import '../Results/Results.css'
+import './Favorite.css';
+import Animal from '../Animal/Animal';
+import Sports from '../Sports/Sports';
+import Funny from '../Funny/Funny';
+import Inspirational from '../Inspirational/Inspirational';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 function Favorite(){
@@ -24,10 +33,11 @@ function Favorite(){
         <>  
         <div className='gifBox'>
             <h1>Favorites my guy</h1>
-            <div className='container'>
                 {favorites &&
-                    <div className='picDiv'>
+                <div className='container'>
+                    
                         {favorites.map(fav => (
+                            <div className='picDiv'>
                             <img 
                                 key={fav.id} 
                                 src={fav.url}
@@ -35,11 +45,34 @@ function Favorite(){
                                 height={250}
                                 className='pic'
                             />
+                                <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                        <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        label="Age"
+                                        // onChange={handleChange}
+                                        >
+                                        <MenuItem value={1}>Funny</MenuItem>
+                                        <MenuItem value={2}>Animal</MenuItem>
+                                        <MenuItem value={3}>Inspirational</MenuItem>
+                                        <MenuItem value={4}>Sports</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                    </div>
                         ))}
                     </div>
                 }
+            <br/>
             </div>
-            </div>
+
+            <Funny />
+            <Animal />
+            <Inspirational />
+            <Sports />
+            
         </>
     )
 }
