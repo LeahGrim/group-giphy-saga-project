@@ -16,10 +16,26 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_RESULTS', fetchResults);
     yield takeEvery('SET_SEARCH', searchParam);
+    yield takeEvery('IMAGE_LIKED', sendFavorite)
 
 
 } // end function rootSaga
     
+
+function* sendFavorite (action){
+    try{
+    console.log('in sendFavorite', action.payload);
+    // set up axios POST
+    yield axios.post('/api/favorite', action.payload)
+    } // try ends here
+    catch(err){
+        console.log('sendFavorite failed', err);
+    }
+} // end function sendFavorite
+
+
+
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
