@@ -1,20 +1,22 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from  'react-redux';
 import axios from 'axios';
+import './Results.css'
 
 
 function Results () {
     const dispatch = useDispatch();
-
-    // const selectedGif = useSelector(store => store.resultsList)
-
+    
+    const selectedGif = useSelector(store => store.resultsList)
+    
+    console.log('this is the selected GIF', selectedGif);
+    
     const likePix = (liked) => {
-        console.log('in likePix');
+        console.log('in likePix', liked);
         dispatch ({
             type: 'IMAGE_LIKED',
             payload: liked
         })
-        
     }
 
     // note .... saga should listen for a dispatch message of "IMAGE_LIKED" 
@@ -24,11 +26,15 @@ function Results () {
 
     return (
         <>
-        <ul>
-            {/* {selectedGif.map((eachGif, index) => (<li key={index}> {<img src={eachGif} alt='cool image' width={200} />} <button onClick={() => likePix(liked)}> ❤️ </button></li>))} */}
-        </ul>
-        
-        
+        <div className="gifBox" >
+            {selectedGif && 
+                <ul>
+                    
+                    {selectedGif.data.map((eachGif, index) => 
+                        (<li key={index}> {<img src={eachGif.images.original.url} alt='cool image' width={200} />} <br></br><button onClick={event => likePix(eachGif.images.original.url)}> ❤️ </button></li>))}
+                </ul>
+            }
+        </div>
         </>
     )
 }
