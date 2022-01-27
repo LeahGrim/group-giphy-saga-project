@@ -5,7 +5,8 @@ import Footer from '../Footer/Footer.jsx'
 import { render } from "react-dom";
 import {
   HashRouter as Router,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 //components
 import Search from '../Search/Search';
@@ -15,21 +16,24 @@ function App() {
   
   return (
     <div className= "App">
-      <Header />
-        <h1>Giphy Search!</h1>
+      <Router>
+        <nav>
+          <Link to='/'>Search</Link>
+          <Link to='/favorite'>My Favorites</Link>
+        </nav>
+        <Header />
 
-        <Router>
+        <Route exact path="/">
+          <Search />
+        </Route>
 
-          <Route exact path="/">
-            <Search />
-          </Route>
+        <Route exact path="/favorite" >
+          <Favorite />
+        </Route>
 
-          <Route exact path="/favorite" >
-            <Favorite />
-          </Route>
+        <Footer />
+      </Router>
 
-        </Router>
-      <Footer />
     </div>
   );
 }
