@@ -14,9 +14,11 @@ import axios from 'axios';
 
 // Create the rootSaga/watcherSaga generator function
 function* rootSaga() {
-yield takeEvery('FETCH_FAVORITES', fetchFavs)
-
+  yield takeEvery('FETCH_FAVORITES', fetchFavs)
+  yield takeEvery('FETCH_RESULTS', fetchResults);
+  yield takeEvery('SET_SEARCH', searchParam);
 } // end function rootSaga
+
 function* fetchFavs(){
     console.log('in saga');
     try{
@@ -28,17 +30,70 @@ function* fetchFavs(){
     } catch(err){
         console.error(err);
     }
-}
+  }
+} // end function rootSaga
+    
 
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Function to get search results
+function* fetchResults() {
+    try {
+        console.log('made it to fetch results');
+
+        // Axios request to get from api
+        let response = yield axios.get('/api/results');
+        console.log('response data is', response.data);
+
+        yield put({
+            type: 'SET_RESULTS',
+            payload: response.data
+        })
+    }
+    catch(err){
+        console.error('failed to get search results', err);
+    }
+}; // end fetchResults function
+
+// Function to get search results
+function* searchParam(action) {
+    try {
+        console.log('made it to search param');
+
+        // Axios request to get from api
+        let response = yield axios.get('/api/results', {params: {q: action.payload}});
+        console.log('response data is', response.data);
+
+        yield put({
+            type: 'SET_RESULTS',
+            payload: response.data
+        })
+    }
+    catch(err){
+        console.error('failed to get search results', err);
+    }
+}; // end fetchResults function
+
+// Reducer to set search results
+const resultsList = (state=null, action) => {
+    switch(action.type) {
+        case 'SET_RESULTS': 
+            console.log('in set results', action.payload)
+            return action.payload
+        default:
+            return state;
+    }
+}; // End resultsList reducer
+
+// Reducer to set search parameter
+// const 
 
 // Create one store that all components can use
 const store = createStore(
     combineReducers({
-        
+        resultsList
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
