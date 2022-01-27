@@ -22,11 +22,23 @@ function* rootSaga() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Function to get search results
+
+
+// Reducer to set search results
+const resultsList = (state=[], action) => {
+    switch(action.type) {
+        case 'SET_SEARCH':
+            return action.payload
+        default:
+            return state;
+    }
+};
 
 // Create one store that all components can use
 const store = createStore(
     combineReducers({
-        
+        resultsList
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
