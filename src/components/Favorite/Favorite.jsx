@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import '../Results/Results.css'
+
+
 function Favorite(){
     const dispatch = useDispatch();
 
@@ -19,14 +22,24 @@ function Favorite(){
     }
     return (
         <>  
+        <div className='gifBox'>
             <h1>Favorites my guy</h1>
-            {favorites &&
-                <ul>
-                    {favorites.map(fav => (
-                        <li key={fav.id}><img src={fav.url}/></li>
-                    ))}
-                </ul>
-            }
+            <div className='container'>
+                {favorites &&
+                    <div className='picDiv'>
+                        {favorites.map(fav => (
+                            <img 
+                                key={fav.id} 
+                                src={fav.url}
+                                width={200} 
+                                height={250}
+                                className='pic'
+                            />
+                        ))}
+                    </div>
+                }
+            </div>
+            </div>
         </>
     )
 }

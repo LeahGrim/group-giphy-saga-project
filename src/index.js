@@ -40,7 +40,7 @@ function* sendFavorite (action){
     try{
     console.log('in sendFavorite', action.payload);
     // set up axios POST
-    yield axios.post('/api/favorite', action.payload)
+    yield axios.post('/api/favorite', {url: action.payload})
     } // try ends here
     catch(err){
         console.log('sendFavorite failed', err);

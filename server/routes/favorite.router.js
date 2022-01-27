@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 // add a new favorite
 router.post('/', (req, res) => {
-  const newFavorite = req.body;
+  const newFavorite = req.body.url;
   console.log('*****************', newFavorite);
 
   const queryText = `INSERT INTO favorites("url")
