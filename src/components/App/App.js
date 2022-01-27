@@ -1,9 +1,12 @@
 import React from 'react';
 import GiphyForm from '../GiphyForm/GiphyForm.jsx'
+import './App.css'
+import Header from '../Header/Header.jsx'
 function App(props) {
   return (
     <div>
-      <h1>Giphy Search!</h1>
+      <Header />
+     
       <GiphyForm />
     </div>
   );
