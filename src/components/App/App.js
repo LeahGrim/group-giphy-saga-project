@@ -1,4 +1,7 @@
 import React from 'react';
+import './App.css'
+import Header from '../Header/Header.jsx'
+import Footer from '../Footer/Footer.jsx'
 import { render } from "react-dom";
 import {
   HashRouter as Router,
@@ -10,21 +13,23 @@ import Favorite from '../Favorite/Favorite';
 
 function App() {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
+    <div className= "App">
+     <Header />
+      <div>
+        <h1>Giphy Search!</h1>
 
-      <Router>
+        <Router>
 
-        <Route exact path="/">
-          <Search />
-        </Route>
-          
-        <Route exact path="/favorite" >
-          <Favorite />
-        </Route>
+          <Route exact path="/">
+            <Search />
+          </Route>
 
-      </Router>
-      
+          <Route exact path="/favorite" >
+            <Favorite />
+          </Route>
+
+        </Router>
+      <Footer />
     </div>
   );
 }
