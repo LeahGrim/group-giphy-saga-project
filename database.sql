@@ -1,5 +1,6 @@
 -- database name: giphy_search_favorites
 
+
 CREATE TABLE "category" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (100) NOT NULL
