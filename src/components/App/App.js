@@ -1,4 +1,5 @@
 import React from 'react';
+import Results from '../Results/Results'
 
 function App(props) {
   return (
