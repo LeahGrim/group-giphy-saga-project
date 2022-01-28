@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('SET_SEARCH', searchParam);
     yield takeEvery('IMAGE_LIKED', sendFavorite);
     yield takeEvery('FETCH_FAVORITES', fetchFavs);
+    yield takeEvery('SET_CATEGORY', setCategory);
     yield takeEvery('DELETE_IMAGE', deleteFavImage);
 } // end function rootSaga
 
@@ -48,7 +49,23 @@ function* sendFavorite (action){
     }
 } // end function sendFavorite
 
-// function to delete image from favorite page
+// Set category function
+function* setCategory(action){
+    console.log('category id is', action.payload);
+
+    try {
+        yield axios.put(`/api/favorite/${action.payload.id}`, action.payload);
+
+        yield put({
+            type: 'FETCH_FAVORITES'
+        })
+    }
+    catch(err) {
+        console.log('category change failed', err);
+    }
+}
+
+ // function to delete image from favorite page
 function* deleteFavImage(action){
     console.log('in deleteFavImage on the index.js, action we sent from client side is', action.payload)
     //specify the item you are deleting by specifying route

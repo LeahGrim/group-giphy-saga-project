@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Favorite.css';
 import Animal from '../Animal/Animal';
@@ -19,7 +19,7 @@ function Favorite(){
 
     // Makes our reducers available in our component
     const favorites = useSelector(store => store.favList);
-    console.log('favorite', favorites)
+    console.log('favorite', favorites);
 
     useEffect(() => {
         get();
@@ -30,7 +30,22 @@ function Favorite(){
         dispatch({
             type: "FETCH_FAVORITES"
         })
-    }
+    };
+
+
+    const handleChange = (event, picID) => {
+        console.log('in handleChange', event, picID);
+
+        dispatch({
+            type: 'SET_CATEGORY',
+            payload: {
+                id: picID,
+                category_id: event,
+            }
+        })
+        
+    };
+
 
     const deleteFavPic=(id) => {
        //id is being sent from the client on click of delete button into deleteFavPic function
@@ -40,55 +55,61 @@ function Favorite(){
             payload: id
         })
     }
+    
     return (
         <>  
         <div className='gifBox'>
             <h1>Favorites my guy</h1>
-                {favorites &&
+                {favorites && // This is saying "if there is something in 'favorite', render
+                // the following code, otherwise, don't render anything and don't give an error"
+                // This prevents that when favorites is empty, the code freaks out trying to render
+                // undefined or null values
                 <div className='container'>
-                    
                         {favorites.map(fav => (
-                            <div className='picDiv'>
+                        fav.category_id === 1 && 
+                            <div className='picDiv' key={fav.id}>
                             <img 
-                                key={fav.id} 
                                 src={fav.url}
                                 width={200} 
                                 height={250}
                                 className='pic'
                             />
+                            <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label" >Category</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            label="Age"
+                                            defaultValue=''
+                                            onChange={event => handleChange(event.target.value, fav.id)}
+                                        >
+                                        <MenuItem value={2} >Funny</MenuItem>
+                                        <MenuItem value={3} >Animal</MenuItem>
+                                        <MenuItem value={4}>Inspirational</MenuItem>
+                                        <MenuItem value={5}>Sports</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
                             {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
                             <div className="favBtns">
                             <IconButton aria-label="delete" size="large" >
                                 <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
                             </IconButton>
-                                <Box sx={{ minWidth: 120 }}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                                        <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        label="Age"
-                                        // onChange={handleChange}
-                                        >
-                                        <MenuItem value={1}>Funny</MenuItem>
-                                        <MenuItem value={2}>Animal</MenuItem>
-                                        <MenuItem value={3}>Inspirational</MenuItem>
-                                        <MenuItem value={4}>Sports</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                                </div> 
+                            
+                                
+                      </div> 
                     </div>
-                        ))}
+
                     </div>
                 }
             <br/>
             </div>
 
-            <Funny />
-            <Animal />
-            <Inspirational />
-            <Sports />
+            <Funny favorites={favorites}/>
+            <Animal favorites={favorites}/>
+            <Inspirational favorites={favorites}/>
+            <Sports favorites={favorites}/>
             
         </>
     )
