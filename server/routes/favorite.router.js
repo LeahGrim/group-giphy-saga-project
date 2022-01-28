@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 // add a new favorite
 router.post('/', (req, res) => {
   const newFavorite = req.body.url;
-  console.log('*****************', newFavorite);
+  console.log('newFavorite url', newFavorite);
 
   const queryText = `INSERT INTO favorites("url")
                     VALUES ($1);
@@ -62,8 +62,22 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
-  res.sendStatus(200);
+router.delete('/:id', (req, res) => {
+  console.log('id is', req.params.id);
+
+  const queryText = `DELETE FROM favorites
+                      WHERE id = $1
+  `
+  const queryParams = [req.params.id];
+
+  pool.query(queryText, queryParams)
+              .then(() => {res.sendStatus(200)
+              console.log('successful delete');
+              })
+              .catch((err) => {
+                console.log('Error completing DELETE fav query', err);
+                res.sendStatus(500);
+              })
 });
 
 module.exports = router;

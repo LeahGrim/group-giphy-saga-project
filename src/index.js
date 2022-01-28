@@ -19,6 +19,7 @@ function* rootSaga() {
     yield takeEvery('IMAGE_LIKED', sendFavorite);
     yield takeEvery('FETCH_FAVORITES', fetchFavs);
     yield takeEvery('SET_CATEGORY', setCategory);
+    yield takeEvery('DELETE_IMAGE', deleteFavImage);
 } // end function rootSaga
 
 
@@ -62,6 +63,21 @@ function* setCategory(action){
     catch(err) {
         console.log('category change failed', err);
     }
+
+ // function to delete image from favorite page
+function* deleteFavImage(action){
+    console.log('in deleteFavImage on the index.js, action we sent from client side is', action.payload)
+    //specify the item you are deleting by specifying route
+    //the action.payload is the id number sent from client side page 
+    let response= yield axios.delete(`/api/favorite/${action.payload}`)
+   
+    //now we call the fetch favorites to list favorite images 
+    //console.log('response.data is', response.data); 
+    yield put({
+        type: 'FETCH_FAVORITES'
+        
+    })
+
 }
 
 // Create sagaMiddleware
@@ -92,7 +108,7 @@ function* searchParam(action) {
         console.log('made it to search param');
 
         // Axios request to get from api
-        let response = yield axios.get('/api/results', {params: {q: action.payload}});
+        let response = yield axios.get('/api/results', {params: {q: action.payload.search, offset: action.payload.page * 10}});
         console.log('response data is', response.data);
 
         yield put({
