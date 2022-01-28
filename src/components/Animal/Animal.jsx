@@ -4,7 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux';
-
+import './Animal.css';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Animal({favorites}) {
 
@@ -49,6 +51,7 @@ function Animal({favorites}) {
                                     height={250}
                                     className='pic'
                                 />
+                                <div className= "categoryDlt"> 
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label" >Category</InputLabel>
@@ -67,7 +70,10 @@ function Animal({favorites}) {
                                     </FormControl>
                                 </Box>
                                 {/* on delete button click, the function deleteFavPic is triggered */}
-                                <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
+                                <IconButton aria-label="delete" size="large" >
+                                        <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
+                                    </IconButton>
+                                </div>
                                 </div>
                             ))}
                     </div>

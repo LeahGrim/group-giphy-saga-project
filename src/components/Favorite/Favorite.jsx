@@ -74,6 +74,7 @@ function Favorite(){
                                     height={250}
                                     className='pic'
                                 />
+                                <div className= "categoryDlt"> 
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label" >Category</InputLabel>
@@ -92,7 +93,7 @@ function Favorite(){
                                     </FormControl>
                                 </Box>
                                 {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
-                                <div className="favBtns">
+                                
                                     <IconButton aria-label="delete" size="large" >
                                         <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
                                     </IconButton>
