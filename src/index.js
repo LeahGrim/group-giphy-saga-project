@@ -53,7 +53,11 @@ function* setCategory(action){
     console.log('category id is', action.payload);
 
     try {
-        yield axios.put(`/api/favorite/${action.payload.id}`, action.payload)
+        yield axios.put(`/api/favorite/${action.payload.id}`, action.payload);
+
+        yield put({
+            type: 'FETCH_FAVORITES'
+        })
     }
     catch(err) {
         console.log('category change failed', err);

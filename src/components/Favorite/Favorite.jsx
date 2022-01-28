@@ -19,9 +19,6 @@ function Favorite(){
     const favorites = useSelector(store => store.favList);
     console.log('favorite', favorites);
 
-    const [catID, setCatID] = useState(1);
-
-
     useEffect(() => {
         get();
     }, []);
@@ -37,8 +34,6 @@ function Favorite(){
     const handleChange = (event, picID) => {
         console.log('in handleChange', event, picID);
 
-        setCatID(event);
-
         dispatch({
             type: 'SET_CATEGORY',
             payload: {
@@ -46,7 +41,7 @@ function Favorite(){
                 category_id: event,
             }
         })
-
+        
     };
 
 
@@ -55,44 +50,48 @@ function Favorite(){
         <>  
         <div className='gifBox'>
             <h1>Favorites my guy</h1>
-                {favorites &&
+                {favorites && // This is saying "if there is something in 'favorite', render
+                // the following code, otherwise, don't render anything and don't give an error"
+                // This prevents that when favorites is empty, the code freaks out trying to render
+                // undefined or null values
                 <div className='container'>
                         {favorites.map(fav => (
-                            <div className='picDiv' key={fav.id} >
-                            <img 
-                                src={fav.url}
-                                width={200} 
-                                height={250}
-                                className='pic'
-                            />
-                            <Box sx={{ minWidth: 120 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label" >Category</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        label="Age"
-                                        defaultValue=''
-                                        onChange={event => handleChange(event.target.value, fav.id)}
-                                    >
-                                    <MenuItem value={2} >Funny</MenuItem>
-                                    <MenuItem value={3} >Animal</MenuItem>
-                                    <MenuItem value={4}>Inspirational</MenuItem>
-                                    <MenuItem value={5}>Sports</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                    </div>
-                        ))}
+                            fav.category_id === 1 && 
+                                <div className='picDiv' key={fav.id} >
+                                <img 
+                                    src={fav.url}
+                                    width={200} 
+                                    height={250}
+                                    className='pic'
+                                />
+                                <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label" >Category</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            label="Age"
+                                            defaultValue=''
+                                            onChange={event => handleChange(event.target.value, fav.id)}
+                                        >
+                                        <MenuItem value={2} >Funny</MenuItem>
+                                        <MenuItem value={3} >Animal</MenuItem>
+                                        <MenuItem value={4}>Inspirational</MenuItem>
+                                        <MenuItem value={5}>Sports</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                                </div>
+                            ))}
                     </div>
                 }
             <br/>
             </div>
 
-            <Funny />
-            <Animal />
-            <Inspirational />
-            <Sports />
+            <Funny favorites={favorites}/>
+            <Animal favorites={favorites}/>
+            <Inspirational favorites={favorites}/>
+            <Sports favorites={favorites}/>
             
         </>
     )
