@@ -65,15 +65,13 @@ function Favorite(){
                 <div className='container'>
                         {favorites.map(fav => (
                             fav.category_id === 1 && 
-                                <div className='picDiv' key={fav.id} >
+                                <div className='picDiv' key={fav.id}>
                                 <img 
                                     src={fav.url}
                                     width={200} 
                                     height={250}
                                     className='pic'
                                 />
-                            {/* on delete button click, the function deleteFavPic is triggered */}
-                            
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label" >Category</InputLabel>
@@ -91,8 +89,9 @@ function Favorite(){
                                         </Select>
                                     </FormControl>
                                 </Box>
-                                </div>
+                                {/* on delete button click, the function deleteFavPic is triggered */}
                                 <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
+                                </div>
                             ))}
                     </div>
                 }

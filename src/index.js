@@ -63,6 +63,7 @@ function* setCategory(action){
     catch(err) {
         console.log('category change failed', err);
     }
+}
 
  // function to delete image from favorite page
 function* deleteFavImage(action){
