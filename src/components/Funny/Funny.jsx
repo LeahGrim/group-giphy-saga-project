@@ -18,8 +18,17 @@ function Funny({favorites}) {
                 category_id: event,
             }
         })
-        
     };
+
+    const deleteFavPic = (id) => {
+        //id is being sent from the client on click of delete button into deleteFavPic function
+        //now we send that id to DELETE_IMAGE SAGA 
+            dispatch({
+                type: "DELETE_IMAGE",
+                payload: id
+            })
+        }
+        
     return (
         <>
         <h1>Funny Favorites</h1>
@@ -54,6 +63,8 @@ function Funny({favorites}) {
                                         </Select>
                                     </FormControl>
                                 </Box>
+                                {/* on delete button click, the function deleteFavPic is triggered */}
+                                <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
                                 </div>
                             ))}
                     </div>
