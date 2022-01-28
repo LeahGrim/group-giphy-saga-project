@@ -91,7 +91,7 @@ function* searchParam(action) {
         console.log('made it to search param');
 
         // Axios request to get from api
-        let response = yield axios.get('/api/results', {params: {q: action.payload}});
+        let response = yield axios.get('/api/results', {params: {q: action.payload.search, offset: action.payload.page * 10}});
         console.log('response data is', response.data);
 
         yield put({

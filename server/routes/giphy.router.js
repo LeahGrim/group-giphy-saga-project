@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
         params: {
             api_key: process.env.GIPHY_API_KEY,
             // Need to figure out how to input the search here
-            q: req.query.q
+            q: req.query.q,
+            offset: req.query.offset,
+            limit: 10
         }
     })
         .then((apiRes) => {
