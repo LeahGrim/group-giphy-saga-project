@@ -22,11 +22,11 @@
     flex-direction: column;
 }
 
-.favBtns{
+.categoryDlt{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    width: 205px;
+    justify-content: space-around;
 }
 
-.pic {
-    margin-top: 5px;
-}
+
