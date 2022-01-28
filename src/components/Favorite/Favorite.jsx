@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Favorite.css';
 import Animal from '../Animal/Animal';
@@ -17,7 +17,10 @@ function Favorite(){
 
     // Makes our reducers available in our component
     const favorites = useSelector(store => store.favList);
-    console.log('favorite', favorites)
+    console.log('favorite', favorites);
+
+    const [catID, setCatID] = useState(1);
+
 
     useEffect(() => {
         get();
@@ -28,39 +31,57 @@ function Favorite(){
         dispatch({
             type: "FETCH_FAVORITES"
         })
-    }
+    };
+
+
+    const handleChange = (event, picID) => {
+        console.log('in handleChange', event, picID);
+
+        setCatID(event);
+
+        dispatch({
+            type: 'SET_CATEGORY',
+            payload: {
+                id: picID,
+                category_id: event,
+            }
+        })
+
+    };
+
+
+
     return (
         <>  
         <div className='gifBox'>
             <h1>Favorites my guy</h1>
                 {favorites &&
                 <div className='container'>
-                    
                         {favorites.map(fav => (
-                            <div className='picDiv'>
+                            <div className='picDiv' key={fav.id} >
                             <img 
-                                key={fav.id} 
                                 src={fav.url}
                                 width={200} 
                                 height={250}
                                 className='pic'
                             />
-                                <Box sx={{ minWidth: 120 }}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                                        <Select
+                            <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label" >Category</InputLabel>
+                                    <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         label="Age"
-                                        // onChange={handleChange}
-                                        >
-                                        <MenuItem value={1}>Funny</MenuItem>
-                                        <MenuItem value={2}>Animal</MenuItem>
-                                        <MenuItem value={3}>Inspirational</MenuItem>
-                                        <MenuItem value={4}>Sports</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                                        defaultValue=''
+                                        onChange={event => handleChange(event.target.value, fav.id)}
+                                    >
+                                    <MenuItem value={2} >Funny</MenuItem>
+                                    <MenuItem value={3} >Animal</MenuItem>
+                                    <MenuItem value={4}>Inspirational</MenuItem>
+                                    <MenuItem value={5}>Sports</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
                     </div>
                         ))}
                     </div>

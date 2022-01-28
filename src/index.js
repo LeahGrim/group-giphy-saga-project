@@ -16,8 +16,9 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_RESULTS', fetchResults);
     yield takeEvery('SET_SEARCH', searchParam);
-    yield takeEvery('IMAGE_LIKED', sendFavorite)
-    yield takeEvery('FETCH_FAVORITES', fetchFavs)
+    yield takeEvery('IMAGE_LIKED', sendFavorite);
+    yield takeEvery('FETCH_FAVORITES', fetchFavs);
+    yield takeEvery('SET_CATEGORY', setCategory);
 } // end function rootSaga
 
 
@@ -47,7 +48,17 @@ function* sendFavorite (action){
     }
 } // end function sendFavorite
 
+// Set category function
+function* setCategory(action){
+    console.log('category id is', action.payload);
 
+    try {
+        yield axios.put(`/api/favorite/${action.payload.id}`, action.payload)
+    }
+    catch(err) {
+        console.log('category change failed', err);
+    }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

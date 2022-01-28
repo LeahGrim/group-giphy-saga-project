@@ -4,7 +4,7 @@ CREATE TABLE "category" (
 );
 
 INSERT INTO "category" ("name")
-VALUES ('funny'), ('animal'), ('inspirational'), ('sports');
+VALUES ('uncategorized'), ('funny'), ('animal'), ('inspirational'), ('sports');
 
 CREATE TABLE "favorites"(
 	"id" SERIAL PRIMARY KEY,
