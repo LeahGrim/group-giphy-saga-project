@@ -68,13 +68,13 @@ function Favorite(){
                         {favorites.map(fav => (
                         fav.category_id === 1 && 
                             <div className='picDiv' key={fav.id}>
-                            <img 
-                                src={fav.url}
-                                width={200} 
-                                height={250}
-                                className='pic'
-                            />
-                            <Box sx={{ minWidth: 120 }}>
+                                <img 
+                                    src={fav.url}
+                                    width={200} 
+                                    height={250}
+                                    className='pic'
+                                />
+                                <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label" >Category</InputLabel>
                                         <Select
@@ -91,20 +91,18 @@ function Favorite(){
                                         </Select>
                                     </FormControl>
                                 </Box>
-                            {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
-                            <div className="favBtns">
-                            <IconButton aria-label="delete" size="large" >
-                                <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
-                            </IconButton>
-                            
-                                
-                      </div> 
-                    </div>
-
-                    </div>
-                }
+                                {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
+                                <div className="favBtns">
+                                    <IconButton aria-label="delete" size="large" >
+                                        <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
+                                    </IconButton>
+                                </div> 
+                            </div> 
+                ))}
+                </div>
+                } 
             <br/>
-            </div>
+        </div>
 
             <Funny favorites={favorites}/>
             <Animal favorites={favorites}/>
