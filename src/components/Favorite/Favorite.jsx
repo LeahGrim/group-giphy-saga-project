@@ -10,6 +10,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function Favorite(){
@@ -64,15 +66,15 @@ function Favorite(){
                 // undefined or null values
                 <div className='container'>
                         {favorites.map(fav => (
-                            fav.category_id === 1 && 
-                                <div className='picDiv' key={fav.id}>
-                                <img 
-                                    src={fav.url}
-                                    width={200} 
-                                    height={250}
-                                    className='pic'
-                                />
-                                <Box sx={{ minWidth: 120 }}>
+                        fav.category_id === 1 && 
+                            <div className='picDiv' key={fav.id}>
+                            <img 
+                                src={fav.url}
+                                width={200} 
+                                height={250}
+                                className='pic'
+                            />
+                            <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label" >Category</InputLabel>
                                         <Select
@@ -89,10 +91,16 @@ function Favorite(){
                                         </Select>
                                     </FormControl>
                                 </Box>
-                                {/* on delete button click, the function deleteFavPic is triggered */}
-                                <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
-                                </div>
-                            ))}
+                            {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
+                            <div className="favBtns">
+                            <IconButton aria-label="delete" size="large" >
+                                <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
+                            </IconButton>
+                            
+                                
+                      </div> 
+                    </div>
+
                     </div>
                 }
             <br/>

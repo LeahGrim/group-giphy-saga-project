@@ -10,14 +10,21 @@
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    margin-top: 10px;
     margin-left: 50px;
 }
 
 .picDiv {
-    border: 1px solid white;
-    height: 350px;
-    width: 300px;
+    border: 1px solid rgb(23, 18, 18);
+    height: 300px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.favBtns{
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .pic {
