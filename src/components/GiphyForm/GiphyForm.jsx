@@ -9,38 +9,40 @@ import Stack from '@mui/material/Stack';
 
 function GiphyForm(){
     let [newGif, setNewGif] = useState('');
-    
-
+    let [page, setPage] = useState(1);
    //setup dispatch 
     const dispatch = useDispatch();
 
     function addNewSearch(event) {
-        event.preventDefault();
+        event !== undefined ? event.preventDefault() : false //without this is gets upset, triggering prevent default from the button
         dispatch({ 
             type: 'SET_SEARCH',
-            payload: newGif
-        })
-        console.log('in grabSearch', newGif)
-        
-        setNewGif('');
+            payload: {search: newGif, page}
+        });
     }
-
-    
+    function pageinate(num){
+        setPage(num);
+        addNewSearch();
+    }
     return(
     <>
-    <form onSubmit={addNewSearch}>
-   
-    <input 
-        type= 'text'
-        placeholder= 'Search for Your Gif Here'
-        value= {newGif}
-        onChange= {event => setNewGif(event.target.value)}
-        className="textArea"
-    />
-    <Stack direction="row" spacing={2}>
-    <Button type='submit' variant="contained" startIcon= {<SendIcon />}> Search</Button>    
-    </Stack>
-    </form>
+        <form onSubmit={addNewSearch}>
+            <input 
+                type= 'text'
+                placeholder= 'Search for Your Gif Here'
+                value= {newGif}
+                onChange= {event => setNewGif(event.target.value)}
+                className="textArea"
+            />
+            <Stack direction="row" spacing={2}>
+            <Button type='submit' variant="contained" startIcon= {<SendIcon />}> Search</Button>    
+            </Stack>
+        </form>
+        <button onClick={() => pageinate(0)}>1</button>
+        <button onClick={() => pageinate(1)}>2</button>
+        <button onClick={() => pageinate(2)}>3</button>
+        <button onClick={() => pageinate(3)}>4</button>
+        <button onClick={() => pageinate(4)}>5</button>
     </>
     )
 }
