@@ -16,8 +16,9 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_RESULTS', fetchResults);
     yield takeEvery('SET_SEARCH', searchParam);
-    yield takeEvery('IMAGE_LIKED', sendFavorite)
-    yield takeEvery('FETCH_FAVORITES', fetchFavs)
+    yield takeEvery('IMAGE_LIKED', sendFavorite);
+    yield takeEvery('FETCH_FAVORITES', fetchFavs);
+    yield takeEvery('DELETE_IMAGE', deleteFavImage);
 } // end function rootSaga
 
 
@@ -47,7 +48,20 @@ function* sendFavorite (action){
     }
 } // end function sendFavorite
 
-
+// function to delete image from favorite page
+function* deleteFavImage(action){
+    console.log('in deleteFavImage on the index.js, action we sent from client side is', action.payload)
+    //specify the item you are deleting by specifying route
+    //the action.payload is the id number sent from client side page 
+    let response= yield axios.delete(`/api/favorite/${action.payload}`)
+   
+    //now we call the fetch favorites to list favorite images 
+    console.log('response.data is', response.data); 
+    yield put({
+        type: 'FETCH_FAVORITES',
+        payload: response.data
+    })
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
