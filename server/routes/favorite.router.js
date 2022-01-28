@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) => {
   const queryParams = [req.params.id];
 
   pool.query(queryText, queryParams)
-              .then(() => {res.sendStatus(500)
+              .then(() => {res.sendStatus(200)
               console.log('successful delete');
               })
               .catch((err) => {
