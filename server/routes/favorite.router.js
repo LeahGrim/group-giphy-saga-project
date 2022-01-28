@@ -42,7 +42,7 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
   res.sendStatus(200);
 });
 

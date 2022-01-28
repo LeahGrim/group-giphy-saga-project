@@ -29,6 +29,15 @@ function Favorite(){
             type: "FETCH_FAVORITES"
         })
     }
+
+    const deleteFavPic=(id) => {
+       //id is being sent from the client on click of delete button into deleteFavPic function
+       //now we send that id to DELETE_IMAGE SAGA 
+        dispatch({
+            type: "DELETE_IMAGE",
+            payload: id
+        })
+    }
     return (
         <>  
         <div className='gifBox'>
@@ -45,6 +54,9 @@ function Favorite(){
                                 height={250}
                                 className='pic'
                             />
+                            {/* on delete button click, the function deleteFavPic is triggered */}
+                            <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
+                           
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label">Category</InputLabel>
