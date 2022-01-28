@@ -11,3 +11,9 @@ form {
     height: 30px;
     margin-right: 10.5px;
 }
+
+.pageButtons{
+    display:flex;
+    justify-content: baseline;
+    align-items: flex-end;
+}

@@ -47,6 +47,13 @@ function Results () {
                 </div>
             }
         </div>
+        <div className= "pageButtons"> 
+        <button onClick={() => pageinate(0)}>1</button>
+        <button onClick={() => pageinate(1)}>2</button>
+        <button onClick={() => pageinate(2)}>3</button>
+        <button onClick={() => pageinate(3)}>4</button>
+        <button onClick={() => pageinate(4)}>5</button>
+        </div>
         </>
     )
 }

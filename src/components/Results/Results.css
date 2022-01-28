@@ -23,3 +23,7 @@
 .pic {
     margin-top: 5px;
 }
+.pageButtons{
+    display: flex;
+    
+}
