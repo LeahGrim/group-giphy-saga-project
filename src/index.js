@@ -56,11 +56,12 @@ function* deleteFavImage(action){
     let response= yield axios.delete(`/api/favorite/${action.payload}`)
    
     //now we call the fetch favorites to list favorite images 
-    console.log('response.data is', response.data); 
+    //console.log('response.data is', response.data); 
     yield put({
-        type: 'FETCH_FAVORITES',
-        payload: response.data
+        type: 'FETCH_FAVORITES'
+        
     })
+
 }
 
 // Create sagaMiddleware

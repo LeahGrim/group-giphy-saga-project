@@ -48,7 +48,7 @@ router.delete('/:id', (req, res) => {
   const queryText = `DELETE FROM favorites
                       WHERE id = $1
   `
-  const queryParams = req.params.id;
+  const queryParams = [req.params.id];
 
   pool.query(queryText, queryParams)
               .then(() => {res.sendStatus(500)})
