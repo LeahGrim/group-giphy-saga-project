@@ -16,12 +16,17 @@ function App() {
   
   return (
     <div className= "App">
+ 
       <Router>
-        <nav>
-          <Link to='/'>Search</Link>
-          <Link to='/favorite'>My Favorites</Link>
-        </nav>
-        <Header />
+      <Header />
+        <nav> <div className= "homepageLinks"> 
+          <div className= "search"> 
+          <Link to='/'> <h1> Search</h1> </Link> 
+          </div>
+          <div className="favoriteBtn">
+          <Link to='/favorite'> <h1> My Favorites</h1> </Link>
+          </div>
+          </div> </nav>
 
         <Route exact path="/">
           <Search />

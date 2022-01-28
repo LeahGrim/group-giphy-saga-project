@@ -10,6 +10,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function Favorite(){
@@ -54,9 +56,11 @@ function Favorite(){
                                 height={250}
                                 className='pic'
                             />
-                            {/* on delete button click, the function deleteFavPic is triggered */}
-                            <button onClick={()=> deleteFavPic(fav.id)}> Delete</button>
-                           
+                            {/* on delete button click, the function deleteFavPic is triggered id number is sent to index */}
+                            <div className="favBtns">
+                            <IconButton aria-label="delete" size="large" >
+                                <DeleteIcon fontSize= "inherit" onClick={()=> deleteFavPic(fav.id)} />
+                            </IconButton>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -73,6 +77,7 @@ function Favorite(){
                                         </Select>
                                     </FormControl>
                                 </Box>
+                                </div> 
                     </div>
                         ))}
                     </div>
